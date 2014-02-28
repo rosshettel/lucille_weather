@@ -1,5 +1,6 @@
 var Forecast = require('forecast');
 var forecastConfig = require('../../config/forecast');
+var CurrentWeather = require('../models/currentWeather');
 
 var forecast = new Forecast({
 	service: 'forecast.io',
@@ -14,6 +15,7 @@ exports.current = function(req, res) {
 		if(err) 
 			console.dir(err);
 		else
-			res.send(weather);
+			var currentWeather = new CurrentWeather(weather);
+			res.send(currentWeather);
 	});
 };
